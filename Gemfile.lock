@@ -2,8 +2,14 @@ GEM
   remote: http://rubygems.org/
   specs:
     addressable (2.3.6)
+    bson (1.10.0)
+    bson_ext (1.10.0)
+      bson (~> 1.10.0)
     cool.io (1.2.1)
     excon (0.32.1)
+    fluent-plugin-mongo (0.7.3)
+      fluentd (~> 0.10.9)
+      mongo (>= 1.8.0)
     fluentd (0.10.45)
       cool.io (>= 1.1.1, < 2.0.0, != 1.2.0)
       http_parser.rb (~> 0.5.1)
@@ -25,6 +31,8 @@ GEM
     launchy (2.4.2)
       addressable (~> 2.3)
     mime-types (2.2)
+    mongo (1.10.0)
+      bson (~> 1.10.0)
     msgpack (0.5.8)
     multi_json (1.9.2)
     netrc (0.7.7)
@@ -38,5 +46,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bson_ext
+  fluent-plugin-mongo
   fluentd
   heroku
