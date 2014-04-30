@@ -20,13 +20,20 @@ A ‘log aggregators’ is a daemon that continuously receive events from the lo
     bundle install
     bundle exec fluentd -c conf/fluent.rb -vv
 
+## Vagrant VirtualBox VM
+
+    git clone https://github.com/fernandoalmeida/fluentd-aggregator.git
+    git submodules init
+    git submodules update
+    vagrant up
+
+    vagrant ssh
+    cd ~/fluentd-aggregator
+    bundle install
+
+    bundle exec fluentd -c conf/fluent.rb -vv
+
 ### Test
 
     curl http://localhost:8888/debug.test  -d 'json={"json":"message"}'
     curl http://localhost:8888/myapp.event -d 'json={"login":{"user":"1"}}'
-
-## Vagrant VM
-
-    git submodules init
-    git submodules update
-    vagrant up

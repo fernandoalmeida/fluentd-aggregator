@@ -7,6 +7,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.network "public_network"
+  config.vm.synced_folder "./", "/home/vagrant/fluentd-aggegator"
 
   config.vm.provision "puppet" do |puppet|
     puppet.manifests_path = "puppet/manifests"
