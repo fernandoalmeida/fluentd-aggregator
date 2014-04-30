@@ -2,13 +2,14 @@
 ## $ echo <json> | fluent-cat <tag>
 source {
   type :forward
+  port ENV['TCP_PORT'] || '24224'
 }
 
 # HTTP input
 # http://localhost:8888/<tag>?json=<json>
 source {
   type :http
-  port ENV['PORT'] || '8888'
+  port ENV['HTTP_PORT'] || '8888'
 }
 
 # match tag=debug.** and dump to console
@@ -18,15 +19,11 @@ match ('debug.**') {
 
 # match all inputs and send to MongoDB
 match ('**') {
-  regex = /mongodb:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/
-  uri = ENV['MONGOLAB_URI']
-  m = regex.match(uri).to_a
-
   type :mongo
-  user       m[1] if m[1]
-  password   m[2] if m[2]
-  host       m[3] || 'localhost'
-  port       m[4] || '27017'
-  database   m[5] || 'fluentd'
-  collection :logs
+  user       ENV['MONGODB_USER']       if ENV['MONGODB_USER']
+  password   ENV['MONGODB_PASSWORD']   if ENV['MONGODB_PASSWORD']
+  host       ENV['MONGODB_HOST']       || 'localhost'
+  port       ENV['MONGODB_PORT']       || '27017'
+  database   ENV['MONGODB_DATABASE']   || 'fluentd'
+  collection ENV['MONGODB_COLLeCTION'] || 'logs'
 }
