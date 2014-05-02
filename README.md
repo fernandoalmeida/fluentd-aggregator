@@ -2,6 +2,8 @@
 
 A ‘log aggregators’ is a daemon that continuously receive events from the log forwarders.
 
+![Fluentd Fowarder/Aggregator](http://docs.fluentd.org/images/fluentd_ha.png)
+
 # Components
 
 * fluentd: https://github.com/fluent/fluentd
